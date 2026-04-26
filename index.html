@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Data Mining — IT_3221 Complete Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --surface2: #f4f2ee;
+    --border: #e5e2db;
+    --border2: #d0cdc5;
+    --text: #1a1916;
+    --text2: #5a5751;
+    --text3: #9a958f;
+    --accent: #2b4c3f;
+    --accent-light: #e8f0ec;
+    --c1: #2b4c3f; /* deep green */
+    --c1l: #d4e8df;
+    --c2: #5c3a1e; /* warm brown */
+    --c2l: #f0e6d8;
+    --c3: #1e3a5c; /* navy */
+    --c3l: #d8e8f0;
+    --c4: #5c1e3a; /* burgundy */
+    --c4l: #f0d8e6;
+    --c5: #3a5c1e; /* olive */
+    --c5l: #e6f0d8;
+    --c6: #5c4a1e; /* amber */
+    --c6l: #f0ead8;
+    --c7: #1e5c5c; /* teal */
+    --c7l: #d8f0f0;
+    --c8: #5c1e1e; /* crimson */
+    --c8l: #f0d8d8;
+    --c9: #3a3a3a; /* charcoal */
+    --c9l: #ebebeb;
+    font-size: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    background: var(--text);
+    color: #faf9f6;
+    padding: 5rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 60px;
+    width: 200px; height: 200px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .cover-kicker {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 1.5rem;
+    font-family: 'DM Mono', monospace;
+  }
+  .cover h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .cover-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    max-width: 500px;
+    line-height: 1.6;
+  }
+  .cover-meta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .cover-stat { }
+  .cover-stat-n { font-size: 1.8rem; font-weight: 600; font-family: 'Lora', serif; }
+  .cover-stat-l { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+  /* ── Nav ── */
+  .toc {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 4rem;
+  }
+  .toc h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 1.5rem;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 8px;
+  }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text2);
+    font-size: 13.5px;
+    transition: background 0.15s;
+    border: 1px solid transparent;
+  }
+  .toc-item:hover { background: var(--surface2); border-color: var(--border); }
+  .toc-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ── Main layout ── */
+  .main { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ── Topic section ── */
+  .topic {
+    padding: 4rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .topic:last-child { border-bottom: none; }
+
+  .topic-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .topic-num-block {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lora', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .topic-title-block { flex: 1; }
+  .topic-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 4px;
+  }
+  .topic-title-block h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .topic-hrs {
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── Section headings inside topic ── */
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 2rem 0 1rem;
+  }
+  .section-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .section-heading h3 {
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── Definition box ── */
+  .definition-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid;
+    border-radius: 0 10px 10px 0;
+    padding: 1.25rem 1.5rem;
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .definition-box p + p { margin-top: 0.75rem; }
+
+  /* ── Facts grid ── */
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  .fact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+  }
+  .fact-label {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .fact-value {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .fact-value strong { font-weight: 600; }
+
+  /* ── Algorithm pills ── */
+  .algo-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+  .algo-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .algo-pill {
+    font-size: 11px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .algo-desc { font-size: 13.5px; color: var(--text2); line-height: 1.55; }
+  .algo-desc strong { color: var(--text); font-weight: 600; }
+
+  /* ── Scenario cards ── */
+  .scenarios { display: flex; flex-direction: column; gap: 14px; }
+  .scenario-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .scenario-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .scenario-tag {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .scenario-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .scenario-body { padding: 14px 16px; font-size: 14px; color: var(--text2); line-height: 1.65; }
+  .scenario-body strong { color: var(--text); font-weight: 600; }
+  .scenario-body .highlight {
+    display: inline-block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 1px 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+  }
+  .scenario-insight {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+    border-left: 2px solid;
+  }
+
+  /* ── Key formula boxes ── */
+  .formula-box {
+    background: #1a1916;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: #c8c5be;
+    line-height: 1.8;
+    margin: 8px 0;
+    overflow-x: auto;
+  }
+  .formula-comment { color: #6b6860; }
+  .formula-key { color: #a8d8a8; }
+  .formula-val { color: #f0c880; }
+
+  /* ── Exam tip ── */
+  .exam-tip {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+    background: #fffbf0;
+    border: 1px solid #e8d88a;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .exam-tip-label {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    color: #8a6a00;
+    margin-bottom: 5px;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 1.5rem 0;
+  }
+
+  /* ── Inline code ── */
+  code {
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    color: var(--text);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--text);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Print ── */
+  @media print {
+    .cover { print-color-adjust: exact; }
+    .topic { page-break-before: always; }
+    body { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <p class="cover-kicker">IT_3221 · B.Tech ICT · Semester VI</p>
+  <h1>Data Mining<br>Complete Study Notes</h1>
+  <p class="cover-sub">9 topics in standard learning order — definitions, key facts, algorithms, and real-world scenarios for every concept.</p>
+  <div class="cover-meta">
+    <div class="cover-stat"><div class="cover-stat-n">9</div><div class="cover-stat-l">Topics</div></div>
+    <div class="cover-stat"><div class="cover-stat-n">48</div><div class="cover-stat-l">Lectures</div></div>
+    <div class="cover-stat"><div class="cover-stat-n">12+</div><div class="cover-stat-l">Algorithms</div></div>
+    <div class="cover-stat"><div class="cover-stat-n">40+</div><div class="cover-stat-l">Scenarios</div></div>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <h2>Contents</h2>
+  <div class="toc-grid">
+    <a href="#t1" class="toc-item"><span class="toc-num" style="background:#d4e8df;color:#2b4c3f;">1</span>Introduction to Data Mining</a>
+    <a href="#t2" class="toc-item"><span class="toc-num" style="background:#d8e8f0;color:#1e3a5c;">2</span>Data Exploration</a>
+    <a href="#t3" class="toc-item"><span class="toc-num" style="background:#f0e6d8;color:#5c3a1e;">3</span>Data Pre-processing</a>
+    <a href="#t4" class="toc-item"><span class="toc-num" style="background:#f0d8e6;color:#5c1e3a;">4</span>Data Warehouse & OLAP</a>
+    <a href="#t5" class="toc-item"><span class="toc-num" style="background:#e6f0d8;color:#3a5c1e;">5</span>Association Rule Mining</a>
+    <a href="#t6" class="toc-item"><span class="toc-num" style="background:#f0ead8;color:#5c4a1e;">6</span>Classification</a>
+    <a href="#t7" class="toc-item"><span class="toc-num" style="background:#d8f0f0;color:#1e5c5c;">7</span>Clustering</a>
+    <a href="#t8" class="toc-item"><span class="toc-num" style="background:#f0d8d8;color:#5c1e1e;">8</span>Outlier Detection</a>
+    <a href="#t9" class="toc-item"><span class="toc-num" style="background:#ebebeb;color:#3a3a3a;">9</span>Data Mining Applications</a>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ════════════════════════════════════════════
+     TOPIC 1 — INTRODUCTION
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t1">
+  <div class="topic-header">
+    <div class="topic-num-block" style="background:#d4e8df;color:#2b4c3f;">1</div>
+    <div class="topic-title-block">
+      <p class="topic-kicker">Topic 01 · 2 hrs · L1–L3</p>
+      <h2>Introduction to Data Mining</h2>
+      <p class="topic-hrs">chapter 1.ppt · Data_Mining_Applications.pptx · Han, Kamber Ch.1</p>
+    </div>
+  </div>
+
+  <!-- WHAT IS IT -->
+  <div class="section-heading">
+    <div class="section-icon" style="background:#d4e8df;">📖</div>
+    <h3 style="color:#2b4c3f;">What is it?</h3>
+  </div>
+  <div class="definition-box" style="border-left-color:#2b4c3f;">
+    <p><strong>Data Mining</strong> is the process of discovering interesting patterns, correlations, anomalies, and statistically significant structures from large amounts of data stored in databases, data warehouses, or other repositories.</p>
+    <p>It sits at the intersection of <strong>database technology</strong>, <strong>machine learning</strong>, <strong>statistics</strong>, and <strong>pattern recognition</strong>. The broader process is called <strong>Knowledge Discovery in Databases (KDD)</strong> — data mining is just one step in that pipeline: <em>data cleaning → integration → selection → transformation → data mining → pattern evaluation → knowledge presentation</em>.</p>
+    <p>Think of it this way: you have a mountain of raw transaction logs, medical records, or social media posts. Data mining is the shovel that digs out the gold — useful, non-trivial, previously unknown, and potentially actionable knowledge.</p>
+  </div>
+
+  <!-- KEY FACTS -->
+  <div class="section-heading">
+    <div class="section-icon" style="background:#d4e8df;">⚡</div>
+    <h3 style="color:#2b4c3f;">Key Facts</h3>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <div class="fact-label" style="color:#2b4c3f;">Data mined</div>
+      <div class="fact-value">Relational DBs, data warehouses, transactional data, streams, spatial, time-series, text, web, multimedia</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#2b4c3f;">Types of patterns</div>
+      <div class="fact-value"><strong>Association rules, classification, regression, clustering, outlier analysis, trend & evolution</strong></div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#2b4c3f;">KDD steps</div>
+      <div class="fact-value">Data cleaning → Integration → Selection → Transformation → <strong>Mining</strong> → Evaluation → Presentation</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#2b4c3f;">Interestingness measures</div>
+      <div class="fact-value">A pattern is interesting if it is <strong>valid, novel, useful, and understandable</strong> — not all patterns qualify</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#2b4c3f;">Major challenges</div>
+      <div class="fact-value">Scalability, high dimensionality, noisy/incomplete data, privacy & security, streaming data</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#2b4c3f;">DM vs ML vs Stats</div>
+      <div class="fact-value">DM focuses on <strong>discovery from stored data</strong>; ML on learning models; statistics on inference and hypothesis testing</div>
+    </div>
+  </div>
+
+  <!-- SCENARIOS -->
+  <div class="section-heading">
+    <div class="section-icon" style="background:#d4e8df;">🎬</div>
+    <h3 style="color:#2b4c3f;">Scenarios to Understand It</h3>
+  </div>
+  <div class="scenarios">
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#d4e8df;color:#2b4c3f;">Retail</span>
+        <span class="scenario-title">The Supermarket Mystery</span>
+      </div>
+      <div class="scenario-body">
+        A supermarket chain has <strong>10 years of billing data</strong> — millions of receipts. A manager notices sales dip every Tuesday but doesn't know why. A data miner runs pattern discovery and finds: <em>customers who buy diapers on Tuesdays rarely return the same week.</em> Further mining reveals a correlation with paycheck cycles in the neighborhood. <strong>This is data mining</strong> — a non-obvious, actionable insight hidden in the raw data.
+        <div class="scenario-insight" style="background:#d4e8df20;border-left-color:#2b4c3f;">The KDD process here: clean the billing data → integrate with calendar data → mine for patterns → evaluate if the pattern is statistically significant → present as a business report.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#d4e8df;color:#2b4c3f;">Healthcare</span>
+        <span class="scenario-title">Hospital Readmission Risk</span>
+      </div>
+      <div class="scenario-body">
+        A hospital has records of 50,000 patients. Without data mining, doctors can only use their experience to predict who will be readmitted within 30 days. With data mining, analysts discover that <strong>patients over 65 who are discharged on a Friday with more than 3 medications</strong> have a 72% readmission rate. This is a <em>classification pattern</em> — one of the 6 pattern types data mining discovers. The hospital can now flag high-risk patients automatically.
+        <div class="scenario-insight" style="background:#d4e8df20;border-left-color:#2b4c3f;">This shows why data mining is different from just querying a database — a SQL query can find "patients readmitted" but cannot discover what conditions predict readmission.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#d4e8df;color:#2b4c3f;">Web / Social</span>
+        <span class="scenario-title">Netflix Recommendation</span>
+      </div>
+      <div class="scenario-body">
+        Netflix mines viewing histories of 200 million users. No human could analyze this — data is too large. Data mining finds <strong>clusters of users with similar taste</strong>, <strong>association rules</strong> (people who watched Stranger Things also watched Dark), and <strong>trends</strong> (thriller viewership spikes on rainy weekends). Each of these is a different type of pattern — data mining covers all of them under one umbrella.
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-tip">
+    <div class="exam-tip-label">Exam Tip</div>
+    Draw the KDD pipeline from memory and be able to explain what happens at each stage. Short-answer questions frequently ask to "distinguish data mining from data warehousing" or "list the 6 types of data mining tasks with one example each."
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     TOPIC 2 — DATA EXPLORATION
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t2">
+  <div class="topic-header">
+    <div class="topic-num-block" style="background:#d8e8f0;color:#1e3a5c;">2</div>
+    <div class="topic-title-block">
+      <p class="topic-kicker">Topic 02 · 4 hrs · L4–L7</p>
+      <h2>Data Exploration</h2>
+      <p class="topic-hrs">Chapter2.ppt · Review of Numericals.pdf · Han, Kamber Ch.2</p>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#d8e8f0;">📖</div>
+    <h3 style="color:#1e3a5c;">What is it?</h3>
+  </div>
+  <div class="definition-box" style="border-left-color:#1e3a5c;">
+    <p><strong>Data Exploration</strong> is the preliminary analysis of data to understand its structure, distribution, types, and relationships before applying any mining algorithms. It answers the question: <em>"What does my data look like?"</em></p>
+    <p>This topic covers three pillars: <strong>(1) Attribute types</strong> — understanding what kind of values your columns hold; <strong>(2) Statistical descriptions</strong> — summarizing the data numerically; <strong>(3) Similarity & dissimilarity measures</strong> — quantifying how alike two data objects are, which is the foundation of almost every clustering and classification algorithm.</p>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#d8e8f0;">⚡</div>
+    <h3 style="color:#1e3a5c;">Key Facts</h3>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e3a5c;">Attribute types</div>
+      <div class="fact-value"><strong>Nominal</strong> (no order, e.g. colour) · <strong>Ordinal</strong> (ranked, e.g. grades) · <strong>Interval</strong> (no true zero, e.g. temperature °C) · <strong>Ratio</strong> (true zero, e.g. salary)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e3a5c;">Central tendency</div>
+      <div class="fact-value"><strong>Mean</strong> (affected by outliers) · <strong>Median</strong> (robust) · <strong>Mode</strong> (most frequent) · <strong>Midrange</strong> = (max+min)/2</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e3a5c;">Dispersion</div>
+      <div class="fact-value"><strong>Variance σ²</strong>, <strong>Std dev σ</strong>, <strong>IQR</strong> = Q3−Q1, <strong>Range</strong>. Box plot shows Q1, median, Q3, whiskers, outliers</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e3a5c;">Similarity vs distance</div>
+      <div class="fact-value">Similarity ∈ [0,1]; distance ∈ [0,∞). Higher similarity = more alike. Higher distance = less alike</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e3a5c;">Minkowski distance</div>
+      <div class="fact-value">d(i,j) = (Σ|x<sub>ik</sub>−x<sub>jk</sub>|<sup>p</sup>)<sup>1/p</sup>. p=1 → Manhattan; p=2 → Euclidean; p=∞ → Chebyshev</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e3a5c;">Jaccard coefficient</div>
+      <div class="fact-value">For binary attributes: J = f₁₁ / (f₀₁ + f₁₀ + f₁₁). Ignores 0-0 matches — useful for sparse data</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#d8e8f0;">⚙️</div>
+    <h3 style="color:#1e3a5c;">Algorithms / Methods Used</h3>
+  </div>
+  <div class="algo-list">
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#d8e8f0;color:#1e3a5c;">Euclidean Distance</span>
+      <div class="algo-desc">The straight-line distance: <strong>d = √(Σ(xᵢ − yᵢ)²)</strong>. Used when all features are on comparable numeric scales. Default metric in K-Means, KNN. Sensitive to scale differences — always normalize first.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#d8e8f0;color:#1e3a5c;">Cosine Similarity</span>
+      <div class="algo-desc"><strong>cos(θ) = (A·B) / (|A|·|B|)</strong>. Measures the angle between two vectors, ignoring magnitude. Ideal for text/document similarity (TF-IDF vectors) where the length of a document shouldn't affect similarity.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#d8e8f0;color:#1e3a5c;">Min-Max Normalization</span>
+      <div class="algo-desc"><strong>v' = (v − min) / (max − min)</strong>. Scales all values to [0, 1]. Use before computing any distance metric so that high-range attributes (e.g. salary 0–100K) don't dominate low-range ones (e.g. age 0–100).</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#d8e8f0;color:#1e3a5c;">Z-score Normalization</span>
+      <div class="algo-desc"><strong>v' = (v − μ) / σ</strong>. Standardizes to mean 0, std dev 1. Preferred when data has outliers (min-max collapses everything if one value is extreme). Output is not bounded to [0,1].</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#d8e8f0;">🎬</div>
+    <h3 style="color:#1e3a5c;">Scenarios to Understand It</h3>
+  </div>
+  <div class="scenarios">
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#d8e8f0;color:#1e3a5c;">Statistics</span>
+        <span class="scenario-title">Understanding a Student Dataset</span>
+      </div>
+      <div class="scenario-body">
+        Imagine a dataset of 100 students with attributes: <span class="highlight">Name</span> (nominal), <span class="highlight">Grade</span> (ordinal — A/B/C/D), <span class="highlight">Temperature in exam room °C</span> (interval), <span class="highlight">Marks out of 100</span> (ratio). You can't average grades (ordinal, no arithmetic). You can average marks (ratio). You can subtract temperatures (interval). Understanding attribute types prevents mathematical errors before you even start mining.
+        <div class="scenario-insight" style="background:#d8e8f020;border-left-color:#1e3a5c;">The mean marks may be 72, but if the distribution is skewed (a few very low scorers), median (say 76) is more representative. A box plot instantly reveals this skew — IQR and outlier dots show the full story.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#d8e8f0;color:#1e3a5c;">Distance</span>
+        <span class="scenario-title">Recommending Similar Movies</span>
+      </div>
+      <div class="scenario-body">
+        Two movies are represented as rating vectors: <strong>Movie A = [5, 1, 4]</strong> (action, romance, thriller ratings) and <strong>Movie B = [4, 1, 3]</strong>. Euclidean distance = √((1)²+(0)²+(1)²) = √2 ≈ 1.41. They are close — similar movies. But what if Movie C = [10, 2, 8]? Euclidean distance from A is large, but <strong>cosine similarity is high</strong> — they point in the same direction. Cosine correctly identifies that C has the same taste profile, just higher ratings overall.
+        <div class="scenario-insight" style="background:#d8e8f020;border-left-color:#1e3a5c;">This is why Netflix uses cosine similarity for content vectors, not Euclidean distance — it captures preference direction, not magnitude.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#d8e8f0;color:#1e3a5c;">Normalization</span>
+        <span class="scenario-title">Why Salary Crushes Age</span>
+      </div>
+      <div class="scenario-body">
+        Customer A: Age=25, Salary=50,000. Customer B: Age=26, Salary=80,000. Euclidean distance without normalization ≈ <strong>30,000</strong> (salary dominates completely; age is invisible). After min-max normalization (age: 0.05, salary: 0.5 for A; age: 0.06, salary: 0.8 for B), distance is now fair. <strong>Always normalize before distance-based algorithms.</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-tip">
+    <div class="exam-tip-label">Exam Tip</div>
+    Numericals: calculate mean, median, mode, Q1, Q3, IQR from a given dataset and identify outliers using the 1.5×IQR rule. Calculate Euclidean, Manhattan, and Minkowski (p=3) distance between two points. Apply Min-Max normalization to a given value.
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     TOPIC 3 — DATA PRE-PROCESSING
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t3">
+  <div class="topic-header">
+    <div class="topic-num-block" style="background:#f0e6d8;color:#5c3a1e;">3</div>
+    <div class="topic-title-block">
+      <p class="topic-kicker">Topic 03 · 5 hrs · L8–L12</p>
+      <h2>Data Pre-processing</h2>
+      <p class="topic-hrs">Chapter3.ppt · Review of Numericals.pdf · Han, Kamber Ch.3</p>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0e6d8;">📖</div>
+    <h3 style="color:#5c3a1e;">What is it?</h3>
+  </div>
+  <div class="definition-box" style="border-left-color:#5c3a1e;">
+    <p><strong>Data Pre-processing</strong> is the set of transformations applied to raw data before mining to improve data quality and make it suitable for algorithms. Real-world data is almost always <em>incomplete</em> (missing values), <em>noisy</em> (errors, outliers), and <em>inconsistent</em> (conflicting records).</p>
+    <p>The five major tasks are: <strong>Data Cleaning</strong> (fix errors), <strong>Data Integration</strong> (merge sources), <strong>Data Reduction</strong> (shrink without losing info), <strong>Data Transformation</strong> (reshape), and <strong>Data Discretization</strong> (convert continuous to discrete).</p>
+    <p><em>"Garbage in, garbage out"</em> — no algorithm can compensate for bad data. Studies estimate <strong>60–80% of a data scientist's time is pre-processing</strong>.</p>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0e6d8;">⚡</div>
+    <h3 style="color:#5c3a1e;">Key Facts</h3>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c3a1e;">Missing value strategies</div>
+      <div class="fact-value"><strong>Ignore</strong> the tuple · Fill with <strong>mean/mode</strong> · Use <strong>most probable value</strong> (Bayesian) · Fill manually</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c3a1e;">Noise handling</div>
+      <div class="fact-value"><strong>Binning</strong> (smoothing by bin means/medians/boundaries) · <strong>Regression</strong> · <strong>Clustering</strong> to detect outliers</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c3a1e;">Data reduction</div>
+      <div class="fact-value"><strong>Dimensionality reduction</strong> (PCA, wavelet) · <strong>Numerosity reduction</strong> (sampling, histograms) · <strong>Compression</strong></div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c3a1e;">Equal-width binning</div>
+      <div class="fact-value">Divides range into N equal intervals. Width = (max − min) / N. Simple, but skewed data leaves some bins empty</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c3a1e;">Equal-frequency binning</div>
+      <div class="fact-value">Each bin has the same number of values. Better for skewed data. Bins have different widths. Also called equal-depth</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c3a1e;">Data integration issues</div>
+      <div class="fact-value"><strong>Entity resolution</strong> (same real-world entity, different IDs) · <strong>Redundancy</strong> (correlating attributes) · <strong>Data value conflicts</strong></div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0e6d8;">⚙️</div>
+    <h3 style="color:#5c3a1e;">Algorithms / Methods Used</h3>
+  </div>
+  <div class="algo-list">
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0e6d8;color:#5c3a1e;">Smoothing by Bin Mean</span>
+      <div class="algo-desc">Sort values → divide into bins → <strong>replace each value with the bin's mean</strong>. Reduces noise. E.g., bin [4, 8, 9] → mean = 7 → all values become 7. Good for smoothing gradual noise.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0e6d8;color:#5c3a1e;">PCA (Dimensionality Reduction)</span>
+      <div class="algo-desc"><strong>Principal Component Analysis</strong> projects high-dimensional data onto a lower-dimensional space by finding orthogonal axes (principal components) of maximum variance. Reduces attributes while retaining most information. Combats the <em>curse of dimensionality</em>.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0e6d8;color:#5c3a1e;">Stratified Sampling</span>
+      <div class="algo-desc">Divide population into strata (subgroups), sample proportionally from each. Ensures rare classes are represented — critical when one class has very few records (e.g., fraud detection where fraud is 0.1% of data).</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0e6d8;color:#5c3a1e;">Decimal Scaling Normalization</span>
+      <div class="algo-desc"><strong>v' = v / 10ʲ</strong>, where j is the smallest integer such that max(|v'|) < 1. Simple and fast. E.g., values in range [−986, 917]: divide by 1000 → all in [−0.986, 0.917].</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0e6d8;">🎬</div>
+    <h3 style="color:#5c3a1e;">Scenarios to Understand It</h3>
+  </div>
+  <div class="scenarios">
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0e6d8;color:#5c3a1e;">Cleaning</span>
+        <span class="scenario-title">Hospital Records with Missing Ages</span>
+      </div>
+      <div class="scenario-body">
+        A hospital dataset has 10,000 patient records. 400 patients have missing age values. Strategy options: <strong>(a) Delete those 400 rows</strong> — loses 4% of data, biased if age-related diseases are over-represented there. <strong>(b) Fill with mean age (say 45)</strong> — fast but inaccurate for young patients. <strong>(c) Fill with most probable value</strong> using a regression model on other attributes (gender, diagnosis) — most accurate. The right choice depends on how important age is to the mining task.
+        <div class="scenario-insight" style="background:#f0e6d820;border-left-color:#5c3a1e;">For exam: always state which method you'd choose and WHY — marks are given for justification, not just the answer.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0e6d8;color:#5c3a1e;">Binning</span>
+        <span class="scenario-title">Smoothing Salary Data</span>
+      </div>
+      <div class="scenario-body">
+        Raw salaries: <span class="highlight">4, 8, 15, 21, 21, 24, 25, 28, 34</span>. Sort them. Equal-width with 3 bins (range=30, width=10): Bin1=[4,8], Bin2=[15,21,21], Bin3=[24,25,28,34]. Smooth by bin mean: Bin1→6, Bin2→19, Bin3→27.75. Now all values in Bin1 become 6. <strong>Noise is reduced</strong> — the 4 and 8 are treated as the same. Equal-frequency with 3 bins (3 values each): [4,8,15], [21,21,24], [25,28,34].
+        <div class="scenario-insight" style="background:#f0e6d820;border-left-color:#5c3a1e;">Equal-frequency better represents the data distribution here — each bin has the same statistical "weight."</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0e6d8;color:#5c3a1e;">Integration</span>
+        <span class="scenario-title">Merging Customer Databases</span>
+      </div>
+      <div class="scenario-body">
+        A company merges its online store DB (Customer_ID = "C-1042") with its loyalty card DB (Member_No = "LCM-1042-A"). They refer to the same person but different IDs — <strong>entity resolution problem</strong>. To detect, correlate on name + email + phone. Also: both DBs have a "purchase_amount" column — one in USD, one in EUR. This is a <strong>data value conflict</strong> that must be resolved before merging.
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-tip">
+    <div class="exam-tip-label">Exam Tip</div>
+    Very common numerical: given a dataset, perform equal-width binning and equal-frequency binning, then smooth by bin mean, bin median, and bin boundaries. Show all intermediate steps. Know the formula for bin width = (max − min) / N.
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     TOPIC 4 — DATA WAREHOUSE & OLAP
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t4">
+  <div class="topic-header">
+    <div class="topic-num-block" style="background:#f0d8e6;color:#5c1e3a;">4</div>
+    <div class="topic-title-block">
+      <p class="topic-kicker">Topic 04 · 4 hrs · L13–L16</p>
+      <h2>Data Warehouse & OLAP</h2>
+      <p class="topic-hrs">chapter-4-Data warehouse.ppt · Han, Kamber Ch.4</p>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0d8e6;">📖</div>
+    <h3 style="color:#5c1e3a;">What is it?</h3>
+  </div>
+  <div class="definition-box" style="border-left-color:#5c1e3a;">
+    <p>A <strong>Data Warehouse</strong> is a subject-oriented, integrated, time-variant, and non-volatile collection of data that supports management decision-making. It consolidates data from multiple operational sources into one analytical repository.</p>
+    <p><strong>OLAP (Online Analytical Processing)</strong> provides tools to interactively analyze this multidimensional data. Think of it as a cube where each face represents a different dimension (time, location, product) and each cell holds a measure (sales, revenue). OLAP lets you slice, dice, roll up, and drill down through this cube.</p>
+    <p><strong>OLTP vs OLAP</strong>: OLTP (your bank's transaction system) handles thousands of small, real-time read/write operations. OLAP handles complex analytical queries on historical data — read-heavy, but the queries are expensive.</p>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0d8e6;">⚡</div>
+    <h3 style="color:#5c1e3a;">Key Facts</h3>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e3a;">4 characteristics of DW</div>
+      <div class="fact-value"><strong>Subject-oriented</strong> (organized around topics) · <strong>Integrated</strong> (uniform format) · <strong>Time-variant</strong> (historical) · <strong>Non-volatile</strong> (not deleted/modified)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e3a;">Star schema</div>
+      <div class="fact-value">One central <strong>fact table</strong> surrounded by <strong>dimension tables</strong>. Simple, denormalized. Fast query performance. Most common DW schema</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e3a;">Snowflake schema</div>
+      <div class="fact-value">Dimension tables are <strong>normalized</strong> (split into sub-dimensions). More storage-efficient, but slower queries due to more joins</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e3a;">OLAP operations</div>
+      <div class="fact-value"><strong>Roll-up</strong> (aggregate up) · <strong>Drill-down</strong> (go deeper) · <strong>Slice</strong> (one dimension fixed) · <strong>Dice</strong> (multiple dims fixed) · <strong>Pivot</strong> (rotate)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e3a;">MOLAP vs ROLAP</div>
+      <div class="fact-value">MOLAP stores pre-computed cubes (fast queries, large storage). ROLAP queries relational DB on-the-fly (flexible, slower)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e3a;">AOI (Attribute-Oriented Induction)</div>
+      <div class="fact-value">Generalizes attribute values by climbing a concept hierarchy (e.g., "Bengaluru" → "Karnataka" → "India"). Produces high-level summaries</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0d8e6;">🎬</div>
+    <h3 style="color:#5c1e3a;">Scenarios to Understand It</h3>
+  </div>
+  <div class="scenarios">
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0d8e6;color:#5c1e3a;">Schema Design</span>
+        <span class="scenario-title">Retail Sales Data Warehouse</span>
+      </div>
+      <div class="scenario-body">
+        A retail chain wants to analyze sales. <strong>Star schema</strong>: Fact table = <span class="highlight">Sales(sale_id, date_id, product_id, store_id, amount)</span>. Dimension tables = <span class="highlight">Date(date_id, day, month, quarter, year)</span>, <span class="highlight">Product(product_id, name, category, brand)</span>, <span class="highlight">Store(store_id, city, state, region)</span>. Queries like "Total sales by quarter, by region" are answered with simple star joins — fast. A snowflake variant would split Product into Product + Category + Brand tables — more normalized but slower.
+        <div class="scenario-insight" style="background:#f0d8e620;border-left-color:#5c1e3a;">The fact table has foreign keys to all dimension tables. Measures (amounts, quantities) sit in the fact table. Descriptors sit in dimensions.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0d8e6;color:#5c1e3a;">OLAP Operations</span>
+        <span class="scenario-title">The Sales Cube in Action</span>
+      </div>
+      <div class="scenario-body">
+        You're viewing a cube: Dimensions = [Time, Location, Product]. Current view: Monthly sales by city for each product category. 
+        <br><br>
+        <strong>Roll-up</strong> on Time: Monthly → Quarterly. You see less granular time data but aggregate sales. 
+        <strong>Drill-down</strong> on Location: City → Neighbourhood. More granular location data. 
+        <strong>Slice</strong>: Fix Time = "Q1 2024". You see a 2D slice (Location × Product) for just Q1. 
+        <strong>Dice</strong>: Fix Time = "Q1–Q2" AND Location = "Bengaluru". A sub-cube. 
+        <strong>Pivot</strong>: Rotate axes so Products become rows and Time becomes columns (like transposing a table).
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0d8e6;color:#5c1e3a;">AOI</span>
+        <span class="scenario-title">Generalizing Student Database</span>
+      </div>
+      <div class="scenario-body">
+        You have a student table with city of origin. AOI climbs the concept hierarchy: "Mysuru" → "Karnataka" → "South India" → "India". Instead of a detailed table of 10,000 cities, you get a generalized summary: "45% of students are from South India." This is how data warehouses produce high-level business summaries automatically.
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-tip">
+    <div class="exam-tip-label">Exam Tip</div>
+    Drawing a star schema from a given scenario is near-guaranteed. Identify: (1) what are the measures? (2) what are the dimensions? Then draw the fact table in the centre with FK arrows to each dimension. Also memorize the definitions and a one-sentence example of all 5 OLAP operations.
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     TOPIC 5 — ASSOCIATION RULE MINING
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t5">
+  <div class="topic-header">
+    <div class="topic-num-block" style="background:#e6f0d8;color:#3a5c1e;">5</div>
+    <div class="topic-title-block">
+      <p class="topic-kicker">Topic 05 · 12 hrs · L17–L28 · Highest Weightage</p>
+      <h2>Association Rule Mining</h2>
+      <p class="topic-hrs">Chapter 5.pptx · apriori-algorithm.pdf · fp-growth-algorithm.pdf · pincer_algorithm.docx</p>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#e6f0d8;">📖</div>
+    <h3 style="color:#3a5c1e;">What is it?</h3>
+  </div>
+  <div class="definition-box" style="border-left-color:#3a5c1e;">
+    <p><strong>Association Rule Mining</strong> discovers interesting co-occurrence relationships among items in large transaction datasets. The classic example: "Customers who buy bread and butter also tend to buy milk." This rule is written as: <strong>bread, butter → milk</strong>.</p>
+    <p>Two key thresholds control what counts as "interesting": <strong>Support</strong> (how frequently the itemset occurs overall) and <strong>Confidence</strong> (how often the rule holds when the left side is true). A rule is accepted only if both exceed user-defined minimums (<em>minsup</em> and <em>minconf</em>).</p>
+    <p>This topic covers four algorithms that find frequent itemsets with different strategies — each trading off speed, memory, and database scans.</p>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#e6f0d8;">⚡</div>
+    <h3 style="color:#3a5c1e;">Key Facts</h3>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a5c1e;">Support</div>
+      <div class="fact-value">support(A→B) = P(A∪B) = <strong>transactions containing both A and B / total transactions</strong>. Measures how often the itemset appears</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a5c1e;">Confidence</div>
+      <div class="fact-value">confidence(A→B) = P(B|A) = <strong>support(A∪B) / support(A)</strong>. Measures rule reliability when A is present</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a5c1e;">Anti-monotone property</div>
+      <div class="fact-value"><strong>All subsets of a frequent itemset must be frequent.</strong> Equivalently: if an itemset is infrequent, all its supersets are infrequent. This is Apriori's core pruning principle</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a5c1e;">Lift</div>
+      <div class="fact-value">lift(A→B) = confidence(A→B) / support(B). Lift > 1 means A and B are positively correlated. Lift = 1 means independent. Used to filter trivial rules</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a5c1e;">Closed frequent itemset</div>
+      <div class="fact-value">An itemset X is closed if no proper superset of X has the same support. Mining closed sets reduces output without losing information</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a5c1e;">ECLAT vertical format</div>
+      <div class="fact-value">Instead of storing transactions, store the set of transaction IDs (tidset) per item. support(A∪B) = |tidset(A) ∩ tidset(B)|. No database scans after initial load</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#e6f0d8;">⚙️</div>
+    <h3 style="color:#3a5c1e;">Algorithms Used</h3>
+  </div>
+  <div class="algo-list">
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#e6f0d8;color:#3a5c1e;">Apriori Algorithm</span>
+      <div class="algo-desc"><strong>Generate-and-test approach</strong>: (1) Scan DB, find frequent 1-itemsets (L₁). (2) Join Lₖ with itself to generate Cₖ₊₁ candidates. (3) Prune candidates using anti-monotone property — any candidate with an infrequent subset is dropped. (4) Scan DB to count support of remaining candidates. Repeat. <strong>Weakness</strong>: multiple DB scans (one per itemset size k); huge candidate sets. Complexity: O(2ⁿ) candidate sets worst case.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#e6f0d8;color:#3a5c1e;">FP-Growth Algorithm</span>
+      <div class="algo-desc"><strong>Divide-and-conquer, no candidate generation</strong>: (1) Scan DB once — build a compact <strong>FP-tree</strong> (Frequent Pattern tree). Each path = a transaction, nodes share prefixes. (2) For each frequent item, extract its <strong>conditional pattern base</strong> (prefix paths). (3) Build a smaller <strong>conditional FP-tree</strong>. (4) Mine patterns recursively. Only <strong>2 DB scans</strong> total. 10–100× faster than Apriori on dense data.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#e6f0d8;color:#3a5c1e;">Pincer Search Algorithm</span>
+      <div class="algo-desc"><strong>Bi-directional search</strong>: Apriori searches bottom-up (from 1-itemsets up). Pincer simultaneously searches top-down from a <strong>Maximal Frequent Itemset Boundary (MFIB)</strong>. If an itemset is a superset of an MFIB member, it is infrequent — pruned from top. This drastically reduces the number of candidates generated, especially when maximal frequent itemsets are large.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#e6f0d8;color:#3a5c1e;">ECLAT (Vertical Format)</span>
+      <div class="algo-desc"><strong>Tidset intersection approach</strong>: Converts horizontal format (transaction → items) to vertical format (item → tidset). Support of any itemset = |intersection of tidsets|. No scanning needed after initial conversion — just set intersections. Extremely fast for sparse datasets. Memory-intensive for very large tidsets.</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#e6f0d8;">🎬</div>
+    <h3 style="color:#3a5c1e;">Scenarios to Understand It</h3>
+  </div>
+  <div class="scenarios">
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#e6f0d8;color:#3a5c1e;">Apriori</span>
+        <span class="scenario-title">Market Basket Analysis Step-by-Step</span>
+      </div>
+      <div class="scenario-body">
+        5 transactions, minsup = 60% (≥ 3 transactions): T1={A,B,C}, T2={A,C}, T3={A,B}, T4={A,B,C,D}, T5={B,C}. 
+        <br><br><strong>L₁</strong>: A(4), B(4), C(4), D(1) → D dropped (support < 3). Frequent: {A},{B},{C}. 
+        <br><strong>C₂</strong>: {A,B}(3✓), {A,C}(3✓), {B,C}(3✓). All frequent → L₂ = all. 
+        <br><strong>C₃</strong>: {A,B,C} — check subsets: {A,B}✓{A,C}✓{B,C}✓ → not pruned. Count: T1,T4 → support=2 → dropped. 
+        <br><strong>Final frequent itemsets</strong>: {A},{B},{C},{A,B},{A,C},{B,C}. 
+        <br><strong>Rule from {A,C}</strong>: A→C: conf = 3/4 = 75%. C→A: conf = 3/4 = 75%.
+        <div class="scenario-insight" style="background:#e6f0d820;border-left-color:#3a5c1e;">Key lesson: the anti-monotone property prunes {A,B,C} because its support (2) is below minsup (3). We didn't even need to count — the rule killed it before the scan.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#e6f0d8;color:#3a5c1e;">FP-Growth</span>
+        <span class="scenario-title">Building the FP-Tree</span>
+      </div>
+      <div class="scenario-body">
+        Same dataset. Step 1: Find frequent items in order of frequency: A:4, B:4, C:4. Step 2: Reorder each transaction by frequency — T1: A,B,C; T2: A,C; T3: A,B; T4: A,B,C; T5: B,C. Step 3: Insert into tree: each item is a node; shared prefixes share paths. The tree compresses 5 transactions into ~7 nodes. Step 4: For item C (least frequent), backtrack all paths containing C to get conditional pattern base = {A,B:2, A:1, B:1}. Build conditional FP-tree for C, mine recursively.
+        <div class="scenario-insight" style="background:#e6f0d820;border-left-color:#3a5c1e;">FP-Growth never generated {A,B,C,D} as a candidate at all — it only explores what's in the compressed tree. No wasteful candidate generation.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#e6f0d8;color:#3a5c1e;">Real World</span>
+        <span class="scenario-title">Amazon's "Frequently Bought Together"</span>
+      </div>
+      <div class="scenario-body">
+        Amazon mines billions of orders using association rule mining. The rule <strong>{Laptop charger, USB hub} → {Laptop stand}</strong> with confidence 68% and lift 3.2 means: customers who buy a charger and hub are 3.2× more likely to also buy a stand than a random customer. Amazon uses this to power the "Frequently Bought Together" section. Because the dataset is huge (millions of items), Apriori is impractical — <strong>FP-Growth or parallel variants</strong> are used instead.
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#e6f0d8;color:#3a5c1e;">ECLAT</span>
+        <span class="scenario-title">Vertical Format Support Counting</span>
+      </div>
+      <div class="scenario-body">
+        Convert to vertical: A→{T1,T2,T3,T4}, B→{T1,T3,T4,T5}, C→{T1,T2,T4,T5}. Support of {A,B} = |{T1,T3,T4} ∩ {T1,T3,T4,T5}| = |{T1,T3,T4}| = 3 ✓. No database scan needed — just list intersections. For large, sparse datasets this is extremely fast because tidsets are small.
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-tip">
+    <div class="exam-tip-label">Exam Tip</div>
+    This is your highest-marks topic. Be able to: (1) Run full Apriori iteration on a given transaction table, showing C₁→L₁→C₂→L₂ etc. (2) Build an FP-tree from scratch and extract the conditional pattern base for a given item. (3) Calculate support, confidence, and lift for given rules. (4) Explain why Pincer is faster than Apriori and why FP-Growth avoids candidate generation.
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     TOPIC 6 — CLASSIFICATION
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t6">
+  <div class="topic-header">
+    <div class="topic-num-block" style="background:#f0ead8;color:#5c4a1e;">6</div>
+    <div class="topic-title-block">
+      <p class="topic-kicker">Topic 06 · 5 hrs · L29–L33</p>
+      <h2>Classification</h2>
+      <p class="topic-hrs">Chapter 6.pptx · Decision tree.pptx · 1-3 algorithm docx files · numericals solution PDF</p>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0ead8;">📖</div>
+    <h3 style="color:#5c4a1e;">What is it?</h3>
+  </div>
+  <div class="definition-box" style="border-left-color:#5c4a1e;">
+    <p><strong>Classification</strong> is a supervised learning task where a model is trained on labelled examples and then predicts the class label for new, unseen instances. It is <em>supervised</em> because training data includes the correct answers (labels).</p>
+    <p>The process has two phases: <strong>Training</strong> (build a model from labelled data) and <strong>Testing/Prediction</strong> (use the model to classify new data). The goal is to learn a mapping from attribute values → class label that generalises to unseen data.</p>
+    <p>This topic covers four approaches: <strong>Decision Trees</strong> (rule-based splits), <strong>Naive Bayes</strong> (probabilistic), <strong>Rule-Based Classification</strong> (explicit IF-THEN rules), and <strong>Ensemble Methods</strong> (combining multiple models for higher accuracy).</p>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0ead8;">⚡</div>
+    <h3 style="color:#5c4a1e;">Key Facts</h3>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c4a1e;">Information Gain (ID3)</div>
+      <div class="fact-value">IG(A) = Entropy(S) − Σ (|Sᵥ|/|S|) · Entropy(Sᵥ). Select attribute with <strong>highest IG</strong>. Biased toward many-valued attributes</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c4a1e;">Entropy</div>
+      <div class="fact-value">H(S) = −Σ pᵢ log₂(pᵢ). Measures impurity. H=0 → pure node (all one class). H=1 → perfectly mixed (50/50 binary)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c4a1e;">Gini Index (CART)</div>
+      <div class="fact-value">Gini(S) = 1 − Σ pᵢ². Gini=0 → pure. Gini=0.5 → 50/50. Split on attribute that gives <strong>lowest weighted Gini</strong></div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c4a1e;">Naïve Bayes</div>
+      <div class="fact-value">P(C|X) ∝ P(C) · Π P(xᵢ|C). Assumes conditional independence of attributes given class. Fast and works well with small data</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c4a1e;">Laplace Smoothing</div>
+      <div class="fact-value">P(xᵢ|C) = (count + 1) / (total + k). Prevents zero probabilities when an attribute value never appears with a class in training data</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c4a1e;">Model evaluation</div>
+      <div class="fact-value">Accuracy, Precision = TP/(TP+FP), Recall = TP/(TP+FN), F1 = 2·P·R/(P+R). Use confusion matrix. Cross-validation for small datasets</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0ead8;">⚙️</div>
+    <h3 style="color:#5c4a1e;">Algorithms Used</h3>
+  </div>
+  <div class="algo-list">
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0ead8;color:#5c4a1e;">ID3 / C4.5 Decision Tree</span>
+      <div class="algo-desc"><strong>Top-down greedy induction</strong>: at each node, select the attribute with maximum Information Gain (ID3) or Gain Ratio (C4.5 — fixes bias toward many-valued attrs). Split the dataset. Recurse. Stop when a node is pure or no attributes remain. C4.5 adds post-pruning to avoid overfitting. Tree is human-readable and handles both categorical and numeric attributes.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0ead8;color:#5c4a1e;">CART (Gini-based)</span>
+      <div class="algo-desc"><strong>Always binary splits</strong>: for each attribute and each possible split point, compute weighted Gini impurity of the two child nodes. Choose the split that minimizes Gini. Repeat. CART produces a binary tree — every internal node has exactly two children. Better for numeric attributes than ID3.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0ead8;color:#5c4a1e;">Naïve Bayes Classifier</span>
+      <div class="algo-desc">For each class C, compute <strong>P(C) × Π P(xᵢ|C)</strong>. Assign the class with the highest product. Uses the <em>conditional independence assumption</em> — attributes don't influence each other given the class. Empirically works very well despite this naive assumption (attributes are usually correlated in reality). Apply Laplace smoothing when counts = 0.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0ead8;color:#5c4a1e;">Bagging (Random Forest)</span>
+      <div class="algo-desc"><strong>Bootstrap aggregating</strong>: train T different decision trees, each on a random subset (with replacement) of training data. Final prediction = majority vote. Reduces <em>variance</em> (overfitting). Random Forest additionally selects a random subset of features at each split — prevents trees from being correlated.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0ead8;color:#5c4a1e;">Boosting (AdaBoost)</span>
+      <div class="algo-desc"><strong>Sequential ensemble</strong>: train a weak classifier. Up-weight misclassified samples. Train next classifier on reweighted data. Combine all classifiers with weighted voting. Reduces <em>bias</em>. More accurate than Bagging in many cases but more prone to overfitting on noisy data.</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0ead8;">🎬</div>
+    <h3 style="color:#5c4a1e;">Scenarios to Understand It</h3>
+  </div>
+  <div class="scenarios">
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0ead8;color:#5c4a1e;">Decision Tree</span>
+        <span class="scenario-title">Loan Approval System</span>
+      </div>
+      <div class="scenario-body">
+        A bank has 1000 historical loan applications labelled "Approved" or "Rejected." Attributes: Age (young/middle/old), Income (low/medium/high), Credit History (bad/good). Build a decision tree: first compute Information Gain for each attribute. Suppose Income has IG=0.3, Age has IG=0.15, Credit has IG=0.4. Credit is selected as root. Branch on bad/good. In the "good" branch, Income is the next best splitter. The tree learns: <em>"if Credit=good AND Income=high → Approve."</em>
+        <div class="scenario-insight" style="background:#f0ead820;border-left-color:#5c4a1e;">This tree is transparent — you can explain the decision to the loan applicant. Neural networks cannot do this. That's why decision trees are used in regulated industries (banking, healthcare).</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0ead8;color:#5c4a1e;">Naïve Bayes</span>
+        <span class="scenario-title">Email Spam Detection</span>
+      </div>
+      <div class="scenario-body">
+        Training data: 100 spam emails, 200 ham emails. In spam, the word "free" appears in 70% of emails: P(free|spam)=0.7. In ham, P(free|ham)=0.05. P(spam)=100/300≈0.33. For a new email containing "free": P(spam|free) ∝ 0.33 × 0.7 = 0.231. P(ham|free) ∝ 0.67 × 0.05 = 0.0335. 0.231 > 0.0335 → classified as <strong>Spam</strong>. If "win" also appears and P(win|spam)=0.6, P(win|ham)=0.01: P(spam|free,win) ∝ 0.33 × 0.7 × 0.6 = 0.1386. P(ham|free,win) ∝ 0.67 × 0.05 × 0.01 = 0.000335. Overwhelmingly spam.
+        <div class="scenario-insight" style="background:#f0ead820;border-left-color:#5c4a1e;">The independence assumption means we just multiply — if words were correlated, this would give wrong probabilities, but in practice spam filters work extremely well with Naïve Bayes.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0ead8;color:#5c4a1e;">Gini Index</span>
+        <span class="scenario-title">When to Use CART over ID3</span>
+      </div>
+      <div class="scenario-body">
+        You have a continuous attribute "Age" with values 22, 25, 28, 35, 50, 60. ID3 can't directly handle continuous attributes — you'd need to discretize first. CART evaluates every possible split point (e.g., Age ≤ 28 vs Age > 28) and computes Gini for each. This makes CART more natural for numeric data. Also: CART always produces binary trees — simpler to interpret and prune than multi-branch ID3 trees.
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0ead8;color:#5c4a1e;">Ensemble</span>
+        <span class="scenario-title">Why One Tree Isn't Enough</span>
+      </div>
+      <div class="scenario-body">
+        Imagine predicting whether a patient has a rare disease. A single decision tree trained on 500 samples overfits — it memorizes training data and fails on new patients (high variance). Random Forest trains 100 trees, each on a random 500-sample bootstrap of the data, and votes. The error of 100 imperfect classifiers combined is far lower than any single perfect-seeming classifier. This is why Random Forest is one of the most widely-used algorithms in practice.
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-tip">
+    <div class="exam-tip-label">Exam Tip</div>
+    Mandatory practise: (1) Calculate entropy and information gain for a weather/play dataset. (2) Calculate Gini index for a 2-class split. (3) Compute Naïve Bayes posterior probabilities with Laplace smoothing. (4) Fill in a confusion matrix and derive accuracy, precision, recall, F1. Your numericals solution PDF has all these worked out — study those examples.
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     TOPIC 7 — CLUSTERING
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t7">
+  <div class="topic-header">
+    <div class="topic-num-block" style="background:#d8f0f0;color:#1e5c5c;">7</div>
+    <div class="topic-title-block">
+      <p class="topic-kicker">Topic 07 · 4 hrs · L34–L37</p>
+      <h2>Clustering</h2>
+      <p class="topic-hrs">Clustering basics.ppt · K means solved example.docx · Agglomeritive.docx · DIANA & DB scan.docx</p>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#d8f0f0;">📖</div>
+    <h3 style="color:#1e5c5c;">What is it?</h3>
+  </div>
+  <div class="definition-box" style="border-left-color:#1e5c5c;">
+    <p><strong>Clustering</strong> is an <em>unsupervised</em> learning task — data has no labels. The goal is to group data objects so that objects within the same cluster are <strong>similar to each other</strong> (high intra-cluster similarity) and objects in different clusters are <strong>dissimilar</strong> (low inter-cluster similarity).</p>
+    <p>Unlike classification, there is no "correct answer" to learn from. The algorithm must discover natural groupings on its own. This is useful when you don't know the categories in advance — e.g., discovering customer segments, gene families, or document topics.</p>
+    <p>Four families of methods: <strong>Partitioning</strong> (K-Means, K-Medoids), <strong>Hierarchical</strong> (Agglomerative, DIANA), <strong>Density-based</strong> (DBSCAN), and <strong>Grid-based</strong>.</p>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#d8f0f0;">⚡</div>
+    <h3 style="color:#1e5c5c;">Key Facts</h3>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e5c5c;">K-Means steps</div>
+      <div class="fact-value"><strong>1.</strong> Pick k centroids randomly. <strong>2.</strong> Assign each point to nearest centroid. <strong>3.</strong> Recompute centroids as means. <strong>4.</strong> Repeat until no change</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e5c5c;">K-Means limitations</div>
+      <div class="fact-value">Sensitive to <strong>outliers</strong> (centroid is pulled). Requires specifying <strong>k</strong> in advance. Assumes <strong>spherical clusters</strong>. Result varies with initial centroid choice</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e5c5c;">K-Medoids (PAM)</div>
+      <div class="fact-value">Centroid is replaced by an actual data point (<strong>medoid</strong>). Robust to outliers. More computationally expensive: O(k(n−k)²) per iteration</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e5c5c;">Hierarchical linkage</div>
+      <div class="fact-value"><strong>Single</strong> (min distance, chain-like), <strong>Complete</strong> (max distance, compact), <strong>Average</strong> (balanced), <strong>Ward</strong> (minimizes variance increase)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e5c5c;">DBSCAN parameters</div>
+      <div class="fact-value"><strong>ε (epsilon)</strong>: neighbourhood radius. <strong>MinPts</strong>: min points to be a core point. Core, border, and noise points are defined relative to these</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#1e5c5c;">Cluster evaluation</div>
+      <div class="fact-value"><strong>SSE</strong> (Within-cluster sum of squares — lower is better). <strong>Silhouette coefficient</strong> ∈ [−1,1] — close to 1 = well-clustered; near 0 = border; negative = wrong cluster</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#d8f0f0;">⚙️</div>
+    <h3 style="color:#1e5c5c;">Algorithms Used</h3>
+  </div>
+  <div class="algo-list">
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#d8f0f0;color:#1e5c5c;">K-Means</span>
+      <div class="algo-desc"><strong>Objective</strong>: minimise SSE = Σᵢ Σₓ∈Cᵢ ||x − μᵢ||². Iterative coordinate descent on cluster assignments and centroids. Complexity: O(nkt) where n=points, k=clusters, t=iterations. Fast and simple. Fails on non-spherical clusters and when outliers distort centroids.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#d8f0f0;color:#1e5c5c;">K-Medoids (PAM)</span>
+      <div class="algo-desc"><strong>Build phase</strong>: initialise medoids. <strong>Swap phase</strong>: for each (medoid, non-medoid) pair, compute cost change if they swap. If swapping reduces total cost (sum of distances to nearest medoid), swap. Repeat until no improvement. The use of actual data points as centres makes this robust when outliers exist.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#d8f0f0;color:#1e5c5c;">Agglomerative HAC</span>
+      <div class="algo-desc"><strong>Bottom-up</strong>: start with N clusters (one per point). Compute all pairwise distances. Merge the two closest clusters. Update distance matrix. Repeat until 1 cluster. The merge sequence produces a <strong>dendrogram</strong> — cut it at any height to get any number of clusters. Linkage criterion determines cluster shape (single → elongated; complete → compact).</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#d8f0f0;color:#1e5c5c;">DIANA (Divisive)</span>
+      <div class="algo-desc"><strong>Top-down</strong>: start with 1 cluster containing all points. Find the point with the highest average dissimilarity to all others in the cluster — this becomes the "splinter group" seed. Reassign points that are closer to the splinter group than to the main cluster. Continue until all clusters are singletons. More suitable when you know the number of clusters at the top level.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#d8f0f0;color:#1e5c5c;">DBSCAN</span>
+      <div class="algo-desc">A point p is a <strong>core point</strong> if ≥ MinPts points lie within ε. A <strong>border point</strong> is within ε of a core point but has fewer than MinPts neighbours. A <strong>noise point</strong> is neither. Clusters grow by connecting density-reachable core points. <strong>Advantages</strong>: finds arbitrary shapes, automatically identifies outliers as noise, no need to specify k. <strong>Weakness</strong>: struggles with varying density clusters.</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#d8f0f0;">🎬</div>
+    <h3 style="color:#1e5c5c;">Scenarios to Understand It</h3>
+  </div>
+  <div class="scenarios">
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#d8f0f0;color:#1e5c5c;">K-Means</span>
+        <span class="scenario-title">Customer Segmentation</span>
+      </div>
+      <div class="scenario-body">
+        An e-commerce company has 10,000 customers with purchase frequency and average spend. They run K-Means (k=3). Initial centroids: (5, 200), (20, 800), (50, 5000). Iteration 1: assign each customer to nearest centroid. Recompute: centroid 1 becomes (6, 210), centroid 2 becomes (22, 750), centroid 3 becomes (48, 4800). Iteration 2: reassign based on new centroids — some customers switch clusters. Repeat until stable. Result: <strong>Cluster 1 = occasional low spenders</strong>, <strong>Cluster 2 = regular mid spenders</strong>, <strong>Cluster 3 = high-value customers</strong>. Marketing team can now target each segment differently.
+        <div class="scenario-insight" style="background:#d8f0f020;border-left-color:#1e5c5c;">This is unsupervised — nobody told the algorithm what "segment" means. It discovered the natural groupings from data alone.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#d8f0f0;color:#1e5c5c;">Hierarchical</span>
+        <span class="scenario-title">Building a Dendrogram from Cities</span>
+      </div>
+      <div class="scenario-body">
+        5 cities with pairwise distances: A-B: 2, A-C: 8, B-C: 7, A-D: 10, B-D: 9, C-D: 4, all-E: large. Using single linkage (merge closest pair): Step 1 → merge A,B (dist=2) → cluster {A,B}. Step 2 → distance from {A,B} to C = min(7,8)=7; {A,B} to D = min(9,10)=9; C to D = 4 → merge C,D (dist=4). Step 3 → {A,B} to {C,D} = 7 → merge. The dendrogram shows exactly when each merge happened. Cut at height 5 → 2 clusters: {A,B} and {C,D,E...}.
+        <div class="scenario-insight" style="background:#d8f0f020;border-left-color:#1e5c5c;">The power of hierarchical clustering: one run gives you the dendrogram, and you choose your desired number of clusters by cutting at any height. K-Means requires re-running for each k.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#d8f0f0;color:#1e5c5c;">DBSCAN</span>
+        <span class="scenario-title">Finding Earthquake Epicentre Clusters</span>
+      </div>
+      <div class="scenario-body">
+        Seismologists have 50,000 GPS coordinates of earthquake epicentres. Some areas have dense clusters (fault lines), others have isolated events. K-Means would force spherical clusters and incorrectly group events near curved fault lines. DBSCAN with ε=10km and MinPts=5 correctly finds: long, curved high-density clusters (fault lines), sparse background noise (random isolated events classified as noise points). The noise points are themselves interesting — they may indicate previously unknown fault activity.
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-tip">
+    <div class="exam-tip-label">Exam Tip</div>
+    Two guaranteed numerical types: (1) K-Means — trace 2 full iterations, showing each point's cluster assignment and the updated centroids. (2) Agglomerative clustering — start from a given distance matrix, show merges step by step, and draw the dendrogram. Practice these from your Agglomerative questions.docx and K means solved example.docx.
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     TOPIC 8 — OUTLIER DETECTION
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t8">
+  <div class="topic-header">
+    <div class="topic-num-block" style="background:#f0d8d8;color:#5c1e1e;">8</div>
+    <div class="topic-title-block">
+      <p class="topic-kicker">Topic 08 · 4 hrs · L38–L41</p>
+      <h2>Outlier Detection</h2>
+      <p class="topic-hrs">Outlier introduction.ppt · outlier numericals.docx · Univariate outlier calculation.docx · grubb's values.jpg</p>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0d8d8;">📖</div>
+    <h3 style="color:#5c1e1e;">What is it?</h3>
+  </div>
+  <div class="definition-box" style="border-left-color:#5c1e1e;">
+    <p>An <strong>outlier</strong> is a data object that deviates significantly from the rest of the dataset — so much so that it appears to have been generated by a different mechanism. Outliers are sometimes called <em>anomalies</em>, <em>exceptions</em>, or <em>surprises</em>.</p>
+    <p>Critically, outliers are <strong>not always errors</strong>. A fraudulent credit card transaction is an outlier AND the most interesting thing in the data. Outlier detection is therefore a primary task in fraud detection, network intrusion, medical diagnosis, and industrial fault detection.</p>
+    <p>Four main approaches: <strong>Statistical</strong> (model data distribution), <strong>Proximity-based</strong> (distance/density from neighbours), <strong>Clustering-based</strong> (far from any cluster), <strong>Classification-based</strong> (train on normal data only).</p>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0d8d8;">⚡</div>
+    <h3 style="color:#5c1e1e;">Key Facts</h3>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e1e;">Global vs local outliers</div>
+      <div class="fact-value"><strong>Global</strong>: outlier w.r.t. entire dataset. <strong>Local (contextual)</strong>: outlier only in a local neighbourhood — e.g., 25°C is normal globally but an outlier if it's winter in Delhi</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e1e;">IQR method</div>
+      <div class="fact-value">Outlier if value < Q1 − 1.5×IQR or > Q3 + 1.5×IQR. Non-parametric — no distribution assumption. Robust and simple</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e1e;">Grubbs' test statistic</div>
+      <div class="fact-value">G = max|xᵢ − x̄| / s. Compare G to critical value from Grubbs table (given α, n). If G > G_critical → outlier detected</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e1e;">LOF (Local Outlier Factor)</div>
+      <div class="fact-value">LOF(p) = avg(lrd(o)) / lrd(p) for o in neighbours. LOF >> 1 → p is in a much sparser region than its neighbours → outlier</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e1e;">Clustering-based</div>
+      <div class="fact-value">DBSCAN noise points are outliers by definition. In K-Means, points far from any centroid (high distance to nearest centroid) are outliers</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#5c1e1e;">Types of outliers</div>
+      <div class="fact-value"><strong>Point outliers</strong> (single data point), <strong>Contextual outliers</strong> (outlier in context), <strong>Collective outliers</strong> (a group of points is unusual even if individual points are normal)</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0d8d8;">⚙️</div>
+    <h3 style="color:#5c1e1e;">Algorithms Used</h3>
+  </div>
+  <div class="algo-list">
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0d8d8;color:#5c1e1e;">Grubbs' Test (Statistical)</span>
+      <div class="algo-desc">Assumes data is normally distributed. Computes <strong>G = |x_suspect − x̄| / s</strong>. Compare against critical value G_α,n from the Grubbs table. If G exceeds the critical value, the suspect value is statistically an outlier at significance level α. Univariate only. Your grubb's values.jpg contains the critical value table — memorise how to read it (row = n, column = significance level).</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0d8d8;color:#5c1e1e;">IQR Method</span>
+      <div class="algo-desc">Sort data → compute Q1, Q3 → IQR = Q3 − Q1. Lower fence = Q1 − 1.5×IQR. Upper fence = Q3 + 1.5×IQR. Any point outside fences = outlier. More robust than Grubbs because it makes no distributional assumption — even works on highly skewed data. This is what a box plot's whiskers represent.</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#f0d8d8;color:#5c1e1e;">LOF Algorithm</span>
+      <div class="algo-desc">1. For each point p, find its k nearest neighbours. 2. Compute <strong>reachability distance</strong> from p to each neighbour o. 3. Compute <strong>local reachability density (lrd)</strong> of p = 1 / (avg reachability distance). 4. LOF(p) = avg(lrd of p's neighbours) / lrd(p). LOF ≈ 1 → normal. LOF >> 1 → outlier. Key advantage: detects local outliers in datasets with varying density — unlike global distance methods.</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#f0d8d8;">🎬</div>
+    <h3 style="color:#5c1e1e;">Scenarios to Understand It</h3>
+  </div>
+  <div class="scenarios">
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0d8d8;color:#5c1e1e;">Statistical</span>
+        <span class="scenario-title">Detecting a Fraudulent Transaction</span>
+      </div>
+      <div class="scenario-body">
+        A credit card user's transaction history: daily spend in rupees over 30 days with mean ₹1200 and std dev ₹300. One day they spend ₹15,000. Grubbs: G = |15000 − 1200| / 300 = 46. G_critical at α=0.05, n=30 is about 3.1. 46 >> 3.1 → <strong>statistically significant outlier</strong>. Bank flags the transaction for review. This is a point outlier and a global outlier (unusual in the entire history).
+        <div class="scenario-insight" style="background:#f0d8d820;border-left-color:#5c1e1e;">The transaction might still be legitimate (user bought a laptop). Outlier detection flags for review — a human or further system makes the final call.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0d8d8;color:#5c1e1e;">IQR Method</span>
+        <span class="scenario-title">Quality Control in Manufacturing</span>
+      </div>
+      <div class="scenario-body">
+        Bottle fill levels (ml): 498, 500, 499, 501, 498, 500, 499, 502, 498, 550, 499. Q1=498.5, Q3=500.5, IQR=2. Lower fence=498.5−3=495.5, Upper fence=500.5+3=503.5. The value <strong>550 ml</strong> exceeds 503.5 → flagged as outlier. The bottle was overfilled — a sensor malfunction or faulty nozzle. This is caught by IQR without needing to know the fill distribution.
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0d8d8;color:#5c1e1e;">LOF</span>
+        <span class="scenario-title">Network Intrusion Detection</span>
+      </div>
+      <div class="scenario-body">
+        A server logs network packets. Most legitimate traffic forms dense clusters (normal browsing patterns). An attacker sends packets at unusual intervals with unusual port combinations. These are a <strong>collective outlier</strong> — individually each packet might look normal, but the pattern of the group is unusual. LOF detects this because the attacker's packets have a very low local reachability density compared to normal traffic clusters. This is why LOF is preferred over Grubbs in network security — the data has multiple varying-density regions.
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#f0d8d8;color:#5c1e1e;">Contextual</span>
+        <span class="scenario-title">Weather Anomaly</span>
+      </div>
+      <div class="scenario-body">
+        Temperature 38°C in Chennai in May: <strong>not an outlier</strong> — typical for the season. Temperature 38°C in Shimla in May: <strong>contextual outlier</strong> — highly unusual for that location and month. Simple statistical methods on raw temperature values would miss this. Contextual outlier detection requires modelling the context (location, season) and detecting outliers within that context — similar to LOF but the "neighbourhood" is defined by context attributes, not just spatial proximity.
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-tip">
+    <div class="exam-tip-label">Exam Tip</div>
+    Practise Grubbs' test end-to-end: compute mean and std dev of dataset → find the most extreme value → compute G → look up critical value from grubb's values.jpg → state conclusion. Also practise IQR-based outlier detection from Univariate outlier calculation.docx. Know all three outlier types (point, contextual, collective) with one example each.
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     TOPIC 9 — DATA MINING APPLICATIONS
+═══════════════════════════════════════════════ -->
+<section class="topic" id="t9">
+  <div class="topic-header">
+    <div class="topic-num-block" style="background:#ebebeb;color:#3a3a3a;">9</div>
+    <div class="topic-title-block">
+      <p class="topic-kicker">Topic 09 · 8 hrs · L42–L48</p>
+      <h2>Data Mining Applications</h2>
+      <p class="topic-hrs">Web Mining.pptx · Data_Mining_Applications.pptx · Recommender_Systems_Case_Study_QnA.pdf · Temporal_Spatial.pdf</p>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#ebebeb;">📖</div>
+    <h3 style="color:#3a3a3a;">What is it?</h3>
+  </div>
+  <div class="definition-box" style="border-left-color:#3a3a3a;">
+    <p>This unit applies data mining techniques to specific real-world domains. Three major application areas are covered: <strong>Recommender Systems</strong> (personalising suggestions), <strong>Web Mining</strong> (mining web content, structure, and usage), and <strong>Temporal & Spatial Data Mining</strong> (patterns that depend on time and geography).</p>
+    <p>Each domain introduces unique challenges: web data is semi-structured and hyperlinked; temporal data has ordering and seasonality; spatial data has geographic neighbourhood relationships. General data mining algorithms often need modification to handle these characteristics.</p>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#ebebeb;">⚡</div>
+    <h3 style="color:#3a3a3a;">Key Facts</h3>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a3a3a;">Collaborative filtering</div>
+      <div class="fact-value"><strong>User-based CF</strong>: find similar users → recommend what they liked. <strong>Item-based CF</strong>: find similar items → recommend similar to what user liked. Uses cosine/Pearson similarity</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a3a3a;">Content-based filtering</div>
+      <div class="fact-value">Recommends items similar to what the user has liked before, based on item attributes (genre, author, tags). Uses TF-IDF to represent content. Doesn't need other users</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a3a3a;">Cold start problem</div>
+      <div class="fact-value">CF fails for new users (no history) or new items (no ratings). Content-based partially solves for new items. Hybrid approaches combine both</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a3a3a;">Web mining types</div>
+      <div class="fact-value"><strong>Content mining</strong> (text, images on pages), <strong>Structure mining</strong> (hyperlinks between pages — PageRank), <strong>Usage mining</strong> (server logs — clickstreams)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a3a3a;">PageRank</div>
+      <div class="fact-value">PR(p) = (1−d)/N + d × Σ PR(q)/L(q). A page's rank = weighted sum of ranks of pages linking to it. Iterative computation until convergence. d=damping factor (0.85)</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-label" style="color:#3a3a3a;">Temporal patterns</div>
+      <div class="fact-value"><strong>Sequential patterns</strong>: Customer buys A, then B, then C over time. <strong>Time-series clustering</strong>: group similar time series by shape. <strong>Trend analysis</strong>: detect rising/falling patterns</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#ebebeb;">⚙️</div>
+    <h3 style="color:#3a3a3a;">Algorithms Used</h3>
+  </div>
+  <div class="algo-list">
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#ebebeb;color:#3a3a3a;">User-based Collaborative Filtering</span>
+      <div class="algo-desc">1. Build user-item rating matrix. 2. Compute pairwise user similarity (Pearson correlation or cosine). 3. For target user, find k most similar users (neighbours). 4. Predict rating = weighted average of neighbours' ratings. 5. Recommend items with highest predicted rating. <strong>Weakness</strong>: doesn't scale to millions of users — pairwise computation is O(n²).</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#ebebeb;color:#3a3a3a;">Item-based CF (Amazon's approach)</span>
+      <div class="algo-desc">Compute item-item similarity (cosine of rating vectors). For a user's rated items, find similar items they haven't rated. Recommend those. Item similarities are stable over time — precompute and cache. More scalable than user-based CF for large item catalogues because number of items < number of users (usually).</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#ebebeb;color:#3a3a3a;">PageRank</span>
+      <div class="algo-desc">Models the web as a directed graph (pages = nodes, hyperlinks = edges). PageRank = probability that a random surfer lands on a page after infinitely many random clicks. Iteratively update PR(p) until convergence. Pages with many high-quality inbound links rank higher. The damping factor d (usually 0.85) models the probability of the surfer continuing (vs jumping to a random page).</div>
+    </div>
+    <div class="algo-item">
+      <span class="algo-pill" style="background:#ebebeb;color:#3a3a3a;">TF-IDF (Content-based)</span>
+      <div class="algo-desc"><strong>TF(t,d)</strong> = (count of term t in document d) / (total terms in d). <strong>IDF(t)</strong> = log(N / df(t)), where df = documents containing t. TF-IDF = TF × IDF. Gives high weight to terms that are frequent in a document but rare across all documents — these are the most distinctive terms. Used to represent document content as vectors for similarity computation.</div>
+    </div>
+  </div>
+
+  <div class="section-heading">
+    <div class="section-icon" style="background:#ebebeb;">🎬</div>
+    <h3 style="color:#3a3a3a;">Scenarios to Understand It</h3>
+  </div>
+  <div class="scenarios">
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#ebebeb;color:#3a3a3a;">Recommender</span>
+        <span class="scenario-title">Spotify's Music Recommendations</span>
+      </div>
+      <div class="scenario-body">
+        User A and User B both liked artists X, Y, Z. User B also likes artist W. User A hasn't heard W. <strong>User-based CF</strong>: A and B are similar users → recommend W to A. Now consider: Spotify has 600 million users. Computing all pairwise similarities = 1.8×10¹⁷ operations — impossible. So Spotify uses <strong>item-based CF</strong>: precompute song-song similarity. When A plays song P, find songs most similar to P and recommend those. This runs in milliseconds because the similarity matrix is precomputed.
+        <div class="scenario-insight" style="background:#ebebeb50;border-left-color:#888;">Spotify also uses audio features (tempo, key, energy) for content-based filtering — making it a hybrid recommender system.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#ebebeb;color:#3a3a3a;">Web Mining</span>
+        <span class="scenario-title">How Google Ranks Pages</span>
+      </div>
+      <div class="scenario-body">
+        Web structure mining: Google treats the web as a graph. A link from page A to page B is a "vote" for B. A link from a high-PageRank page (say Wikipedia) is worth more than one from a personal blog. PageRank iterates: PR(A) = 0.15/N + 0.85 × (PR(Wikipedia)/L_wiki + ...). After ~50 iterations, PageRank values converge. Pages with high PageRank appear first in search results. This is why SEO focuses on getting backlinks from authoritative sites.
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#ebebeb;color:#3a3a3a;">Temporal Mining</span>
+        <span class="scenario-title">E-commerce Purchase Sequences</span>
+      </div>
+      <div class="scenario-body">
+        Sequential pattern mining on customer purchase history: A customer first buys a <strong>camera</strong>, then a <strong>memory card</strong>, then a <strong>camera bag</strong> — across three separate transactions over two weeks. This is a sequential pattern: <em>camera → memory card → bag</em>. Finding this pattern across thousands of customers allows e-commerce sites to send targeted emails: "You bought a camera 3 days ago — here are memory cards." This uses temporal ordering, not just co-occurrence (association rules).
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="scenario-tag" style="background:#ebebeb;color:#3a3a3a;">Spatial Mining</span>
+        <span class="scenario-title">Crime Hotspot Analysis</span>
+      </div>
+      <div class="scenario-body">
+        A city police department has GPS coordinates of 50,000 reported crimes over 5 years. Spatial clustering (DBSCAN on coordinates) reveals crime hotspots — dense clusters of incidents. These hotspots are spatially correlated (nearby regions have similar crime rates). Spatial association rules: <em>"Regions near bars with poor lighting have 3× higher crime rate."</em> This is a spatial association rule where the relationship is geographic proximity, not transactional co-occurrence.
+      </div>
+    </div>
+  </div>
+
+  <div class="exam-tip">
+    <div class="exam-tip-label">Exam Tip</div>
+    This unit is almost entirely case study questions — read Recommender_Systems_Case_Study_QnA.pdf and Temporal_Spatial_Data_Mining_Case_Studies.pdf very carefully, as these files likely mirror your exact exam format. Know: (1) difference between collaborative and content-based filtering with pros/cons of each, (2) cold start problem and how to handle it, (3) the three types of web mining, (4) difference between sequential patterns and association rules.
+  </div>
+</section>
+
+</div><!-- end .main -->
+
+<div class="footer">
+  IT_3221 Data Mining · Dr. Madhura K · B.Tech ICT Semester VI · Complete Notes
+</div>
+
+</body>
+</html>
