@@ -1525,6 +1525,14 @@
 
 </div><!-- end .main -->
 
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top" style="position:fixed;bottom:28px;right:28px;width:44px;height:44px;border-radius:50%;background:#1a1916;color:#faf9f6;border:none;cursor:pointer;font-size:18px;display:none;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,0.18);z-index:999;transition:opacity 0.2s;">↑</button>
+<script>
+  const btn = document.getElementById('topBtn');
+  window.addEventListener('scroll', () => {
+    btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+  });
+</script>
+
 <div class="footer">
   IT_3221 Data Mining · Dr. Madhura K · B.Tech ICT Semester VI · Complete Notes
 </div>
